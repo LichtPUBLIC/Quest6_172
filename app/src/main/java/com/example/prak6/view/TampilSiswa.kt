@@ -2,7 +2,11 @@ package com.example.prak6.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -25,15 +29,16 @@ import com.example.prak6.model.Siswa
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TampilData(
+    //edit 1 = parameter satusUISiswa
     statusUiSiswa: Siswa,
     onBackBtnClick:()->Unit
 ){
+    //edit 2
     val items = listOf(
-        Pair(stringResource(id = R.string.nama_lengkap), statusUiSiswa.nama),
-        Pair(stringResource(id = R.string.jenis_kelamin), statusUiSiswa.gender),
-        Pair(stringResource(id = R.string.alamat), statusUiSiswa.alamat),
+        Pair(stringResource(id = R.string.nama_lengkap),statusUiSiswa.nama),
+        Pair(stringResource(id = R.string.jenis_kelamin),statusUiSiswa.gender),
+        Pair(stringResource(id = R.string.alamat),statusUiSiswa.alamat),
     )
-
     Scaffold (modifier = Modifier,
         topBar = {
             TopAppBar(
@@ -51,14 +56,15 @@ fun TampilData(
                 items.forEach { item ->
                     Column {
                         Text(text = item.first.uppercase(), fontSize = 16.sp)
-                        Text(
-                            text = item.second,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = FontFamily.Cursive,
-                            fontSize = 22.sp
-                        )
+                        Text(text = item.second, fontWeight = FontWeight.Bold, fontFamily = FontFamily.Cursive, fontSize = 22.sp)
                     }
                     HorizontalDivider(thickness = 1.dp, color = Color.Cyan)
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onBackBtnClick){
+                    Text(text = stringResource(id= R.string.back))
                 }
             }
         }
