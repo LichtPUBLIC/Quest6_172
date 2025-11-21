@@ -9,6 +9,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.width
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +31,9 @@ fun FormIsian(
     OnSubmitBtnClick : (MutableList<String>) -> Unit,
     modifier: Modifier = Modifier
 ){
+    // State untuk Nama
+    var txtNama by rememberSaveable { mutableStateOf("") }
+
     Scaffold (modifier = Modifier,
         topBar = {
             TopAppBar(
@@ -37,8 +48,17 @@ fun FormIsian(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally) {
 
-            Text(text = "Form akan muncul di sini") // Placeholder sementara
-
+            // Input Nama
+            OutlinedTextField(
+                value = txtNama,
+                singleLine = true,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .width(250.dp),
+                label = { Text(text = "nama_lengkap") },
+                onValueChange = { txtNama = it}
+            )
         }
     }
 }
