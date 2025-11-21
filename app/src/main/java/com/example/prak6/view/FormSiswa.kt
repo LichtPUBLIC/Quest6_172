@@ -16,6 +16,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material3.RadioButton
+import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,7 +37,7 @@ fun FormIsian(
 ){
     // State untuk Nama
     var txtNama by rememberSaveable { mutableStateOf("") }
-
+    var txtGender by remember { mutableStateOf("") }
     Scaffold (modifier = Modifier,
         topBar = {
             TopAppBar(
@@ -59,6 +63,22 @@ fun FormIsian(
                 label = { Text(text = "nama_lengkap") },
                 onValueChange = { txtNama = it}
             )
+            Row {
+                pilihanJk.forEach { item ->
+                    Row(
+                        modifier = Modifier.selectable(
+                        selected = txtGender == item,
+                        onClick = { txtGender = item }
+                    ),
+                        verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(
+                            selected = txtGender == item,
+                            onClick = { txtGender = item }
+                        )
+                        Text(text = item)
+                    }
+                }
+            }
         }
     }
 }
